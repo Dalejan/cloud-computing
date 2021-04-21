@@ -1,0 +1,48 @@
+Vagrant.configure("2") do |config|
+  config.vm.define :clienteUbuntu do |clienteUbuntu|
+    clienteUbuntu.vm.box = "bento/ubuntu-20.04"
+    clienteUbuntu.vm.network :private_network, ip: "192.168.100.2"
+    clienteUbuntu.vm.hostname = "clienteUbuntu"
+  end
+
+  config.vm.define :servidorUbuntu do |servidorUbuntu|
+    servidorUbuntu.vm.box = "bento/ubuntu-20.04"
+    servidorUbuntu.vm.network :private_network, ip: "192.168.100.3"
+    servidorUbuntu.vm.synced_folder "./sync", "/home/vagrant/sync"
+    servidorUbuntu.vm.hostname = "servidorUbuntu"
+  end
+end
+
+#sudo apt-get install lxd -y
+#lxc list
+#lxc image list
+#lxc laucn images:ubuntu/20.04 server
+
+
+## Portforwarding-> lxc config device list server
+'''
+Port forwarding local 2200 - container 22 ssh
+Port forwarding local 3000 - container 80 node server
+'''
+
+## Enter as sudo to container -> sudo lxc exec server bash
+
+##Live migration
+'''
+When a checkpoint saved on one host is
+restored on a different host, that is called live migration.
+
+Stateless: 
+Cuando no interesa el estado de lo que este en el contenedor.
+
+Stateful:
+Cuando el backup depende de información pasada (estado) para funcionar correctamente,
+generalmente pasa con servicios u aplicaciones.
+
+
+
+'''
+#CRIU = Checkpoint Restore in Userspace
+
+# sudo add-apt-repository ppa:criu/ppa
+# sudo apt-get install criu
