@@ -7,4 +7,6 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(path.resolve(__dirname, './index.html')).pipe(res)
 })
 
-server.listen(process.env.PORT || 3000)
+server.listen(process.env.PORT || 3000,"127.0.0.1",()=>{
+  console.log("Server running on 3000 port")
+})
