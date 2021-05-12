@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
   config.vm.define :servidorUbuntu do |servidorUbuntu|
     servidorUbuntu.vm.box = "bento/ubuntu-20.04"
     servidorUbuntu.vm.network :private_network, ip: "192.168.100.3"
+    servidorUbuntu.vm.network "forwarded_port", guest: 3000, host: 8030
+    servidorUbuntu.vm.network "forwarded_port", guest: 80, host: 8080
     servidorUbuntu.vm.synced_folder "./sync", "/home/vagrant/sync"
     servidorUbuntu.vm.hostname = "servidorUbuntu"
   end
