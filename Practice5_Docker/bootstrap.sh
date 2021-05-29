@@ -26,6 +26,13 @@ echo "-- [Docker] Install the latest docker engine--"
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
+echo "-- [Docker] remove sudo permission (you must exit and enter to the VM again) --"
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker 
+
+#echo "-- [Docker] Run all Dockerfiles --"
+#find . -name *Dockerfile -print
 
 ## sudo docker exec containerName jupyter notebook list
 ## sudo docker exec webprueba ls /syncfolder
